@@ -1,0 +1,17 @@
+{
+  "name": "DevOps",
+  "version": "1.0.0",
+  "description": "A Node.js project for DevOps",
+  "main": "app.js",
+  "scripts": {
+    "sonarqube": "sonar-scanner -Dsonar.projectKey=NodeJS -Dsonar.organization=my-org -Dsonar.host.url=http://192.168.5.82:9000 -Dsonar.login=sqp_0307e1731c2a108af7a1db0e34ccadb580273a9a"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "request": "^2.85.0"
+  },
+  "devDependencies": {}
+}
+

@@ -1,0 +1,28 @@
+image: maven:3.3.9
+
+pipelines:
+  default:
+    - step:
+        name: Code Analysis
+        caches:
+          - sonar
+        script:
+          - pipe: sonarsource/sonarqube-scan:2.0.1
+            variables:
+              SONAR_HOST_URL: "http://192.168.5.82:9000"
+              SONAR_TOKEN: sqp_0307e1731c2a108af7a1db0e34ccadb580273a9a
+        artifacts:
+          - sonar-report.json
+    - step:
+        name: Assign Issues to Last Committer
+        script:
+          - pipe: atlassian/ssh-run:0.2.2
+            variables:
+              SSH_USER: 'root'
+              SERVER: 'production.example.com'
+              COMMANDS: |
+                cd /path/to/app
+                python assign_sonar_issues.py
+definitions:
+  caches:
+    sonar: ~/.sonar
